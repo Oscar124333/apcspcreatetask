@@ -1,50 +1,33 @@
-#include "cards.h" 
+#include "cards.h"
+#include "constants.h"
+
 #include <stdio.h>
-#include <stdint.h>
 #include <stdlib.h>
-#include <stdbool.h>
-
-// Basic 52-card deck definitions
-const uint8_t NUMBER_SUITS = 4;
-const uint8_t SIZE_SUIT = 13;
-const uint8_t SIZE_DECK = SIZE_SUIT * NUMBER_SUITS; 
-
-const char *SUITS[] =
-    {"Spades", "Hearts", "Clubs", "Diamonds"};
-
-const char *RANKS[] =
-    {"2", "3", "4", "5", "6", "7", "8", "9", "10",
-    "Jack", "Queen", "King", "Ace"};
-
-const uint8_t VALUES_RANK[] =
-    {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11};
-    // 2-10 (2-10), Face x3 (10), Ace (11)
+#include <stdint.h>
 
 // Card Functions
 
-bool deck_allocate(Card **deck)
+Card** deck_allocate(void)
 {
-    Card **ptrSuit = malloc(sizeof(Card) * NUMBER_SUITS);
-    if (ptrSuit == NULL)
+    Card **ptrDeck = malloc(sizeof(Card) * NUMBER_SUITS);
+    if (ptrDeck == NULL)
     {
-        free(ptrSuit);
+        free(ptrDeck);
         perror("Suit malloc");
-        return false;
+        return NULL;
     }
 
-    deck = ptrSuit;
     for (int i = 0; i < NUMBER_SUITS; i++)
     {
-        Card *ptrCard = malloc(sizeof(Card) * SIZE_SUIT);
-        if (ptrCard == NULL)
+        ptrDeck[i] = malloc(sizeof(Card) * SIZE_SUIT);
+        if (ptrDeck[i] == NULL)
         {
-            free(ptrCard);
+            free(ptrDeck[i]);
             perror("Suit malloc");
-            return false;
+            return NULL;
         }
-        deck[i] = ptrCard;
     }
-    return true;
+    return ptrDeck;
 }
 
 int value_total(Card *card)

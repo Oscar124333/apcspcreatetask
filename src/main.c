@@ -1,26 +1,33 @@
+#include "constants.h"
+#include "cards.h"
+#include "dealer.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-
-#include "cards.h"
+#include <time.h>
 
 int main(void)
 {
-    // Card *playerDeck = malloc(sizeof(Card) * SIZE_DECK);
+    srand(time(NULL));
 
-    // card_construct(&playerDeck[0], "King", "Clubs", 10, 1.5);
-    // int x = playerDeck[0].value_total(&playerDeck[0]);
-
-    // printf("suit: %s\n", playerDeck[0].suit);
-    // printf("total: %d\n", x);
-
-    Card **playerDeck;
-    if (!deck_allocate(playerDeck))
-    {
-        return -1;
-    }
+    Card **playerDeck = deck_allocate();
+    if (playerDeck == NULL) {return -1;}
 
     deck_construct(playerDeck);
+
+    /* debug */
+    // for (int i = 0; i < NUMBER_SUITS; i++)
+    // {
+    //     printf("\nSuit: %s\n", SUITS[i]);
+    //     for (int j = 0; j < SIZE_SUIT; j++)
+    //     {
+    //         printf("Rank: %s, Value: %d\n", playerDeck[i][j].rank_string, playerDeck[i][j].value_base);
+    //     }
+    // }
+    /* end */
+
+    hand_generate();
 
     return 0;
 }
