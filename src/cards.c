@@ -36,23 +36,26 @@ int value_total(Card *card)
     return output;
 }
 
-void card_construct(Card *card, char *suit, char *rank_string, uint8_t value_base, float mult)
+void card_construct(Card *card, char *suit, char *rank_string, uint8_t value_base)
 {
     card->suit = suit;
     card->rank_string = rank_string;
     card->value_base = value_base;
-    card->multiplier = mult;
+    card->multiplier = 1;
+    card->drawn = false;
     
     card->value_total = value_total;
 }
 
-void deck_construct(Card **deck)
+Card** deck_construct(void)
 {
+    Card **deck = deck_allocate();
     for (int i = 0; i < NUMBER_SUITS; i++)
     {
         for (int j = 0; j < SIZE_SUIT; j++)
         {
-            card_construct(&deck[i][j], SUITS[i], RANKS[j], VALUES_RANK[j], 1);
+            card_construct(&deck[i][j], SUITS[i], RANKS[j], VALUES_RANK[j]);
         }
     }
+    return deck;
 }

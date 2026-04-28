@@ -1,5 +1,6 @@
 #include "dealer.h"
 #include "constants.h"
+#include "cards.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,12 +25,29 @@ int basic_RNG(unsigned int seed, int rangeStart, int rangeEnd)
     return output;
 }
 
-void hand_generate(void/*Card **deck, int handSize*/)
+void hand_generate(Card **deck, int handSize)
 {
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < handSize; i++)
     {
-        int rand_num = basic_RNG(nano_seed(), 0, SIZE_SUIT);
-        printf("%d\n", rand_num);
+        int suit = 0;
+        int incCount = 0;
+        int randNum = basic_RNG(nano_seed(), 0, SIZE_SUIT);
+
+        Card *chosen = &deck[suit][randNum];
+        while (chosen->drawn == true)
+        {
+            incCount++;
+            suit++;
+            suit %= NUMBER_SUITS;
+            if (incCount >= NUMBER_SUITS)
+            {
+                randNum++;
+                randNum %= SIZE_SUIT;
+            }
+            chosen = &deck[suit][randNum];
+        }
+        printf("%s of %s\n", chosen->rank_string, chosen->suit);
+        chosen->drawn = true;
     }
 }

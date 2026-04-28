@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+// True/false macro
+#define false 0
+#define true 1
+
 // Basic 52-card deck definitions
 extern const uint8_t NUMBER_SUITS;
 extern const uint8_t SIZE_SUIT;

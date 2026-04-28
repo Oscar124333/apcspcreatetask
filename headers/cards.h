@@ -13,15 +13,14 @@ typedef struct Card
     char *rank_string;
     uint8_t value_base;
     float multiplier;
+    _Bool drawn;
 
     int (*value_total)(struct Card*);
 } Card;
 
-extern Card test;
-
-Card** deck_allocate(void);
 int value_total(Card *card);
-void card_construct(Card *card, char *suit, char *rank_string, uint8_t value_base, float mult);
-void deck_construct(Card **deck);
+Card** deck_allocate(void);
+void card_construct(Card *card, char *suit, char *rank_string, uint8_t value_base);
+Card** deck_construct(void);
 
 #endif

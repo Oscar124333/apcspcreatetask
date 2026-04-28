@@ -11,10 +11,9 @@ int main(void)
 {
     srand(time(NULL));
 
-    Card **playerDeck = deck_allocate();
+    Card **playerDeck = deck_construct();
     if (playerDeck == NULL) {return -1;}
 
-    deck_construct(playerDeck);
 
     /* debug */
     // for (int i = 0; i < NUMBER_SUITS; i++)
@@ -27,7 +26,7 @@ int main(void)
     // }
     /* end */
 
-    hand_generate();
+    hand_generate(playerDeck, 5);
 
     return 0;
 }
