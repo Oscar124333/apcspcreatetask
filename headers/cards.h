@@ -20,7 +20,7 @@ typedef struct Card
 
 int value_total(Card *card);
 Card** deck_allocate(void);
-void card_construct(Card *card, char *suit, char *rank_string, uint8_t value_base);
+void card_construct(Card *card, const char *suit, const char *rank_string, uint8_t value_base);
 Card** deck_construct(void);
 
 #endif

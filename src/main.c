@@ -11,6 +11,8 @@ int main(void)
 {
     srand(time(NULL));
 
+    int userInput = 0;
+
     Card **playerDeck = deck_construct();
     if (playerDeck == NULL) {return -1;}
 
@@ -25,8 +27,14 @@ int main(void)
     //     }
     // }
     /* end */
+    
+    Card *hand = hand_generate(playerDeck, 5);
 
-    hand_generate(playerDeck, 5);
+    for (int i = 0; i < 5; i++)
+    {
+        printf("Suit: %s, Rank: %s, Value: %d\n", hand[i].suit, hand[i].rank_string, hand[i].value_base);
+    }
 
+    free(hand);
     return 0;
 }

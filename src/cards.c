@@ -36,7 +36,7 @@ int value_total(Card *card)
     return output;
 }
 
-void card_construct(Card *card, char *suit, char *rank_string, uint8_t value_base)
+void card_construct(Card *card, const char *suit, const char *rank_string, uint8_t value_base)
 {
     card->suit = suit;
     card->rank_string = rank_string;

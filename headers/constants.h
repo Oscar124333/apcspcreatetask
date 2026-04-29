@@ -16,4 +16,6 @@ extern const char *SUITS[];
 extern const char *RANKS[];
 extern const uint8_t VALUES_RANK[];
 
+// Other Constants
+extern const uint8_t NULL_TERM;
 #endif

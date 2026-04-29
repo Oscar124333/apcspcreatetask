@@ -17,3 +17,6 @@ const char *RANKS[] =
 const uint8_t VALUES_RANK[] =
     {2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11};
     // 2-10 (2-10), Face x3 (10), Ace (11)
+
+// Other Constants
+const uint8_t NULL_TERM = 1;
