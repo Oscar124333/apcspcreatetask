@@ -48,24 +48,16 @@ int main(void)
             break;
             case SEEDECK:
             {
-                printf("\n\n*****\nDECK\n*****");
-                for (int i = 0; i < NUMBER_SUITS; i++)
-                {
-                    printf("\nSuit: %s\n", SUITS[i]);
-                    for (int j = 0; j < SIZE_SUIT; j++)
-                    {
-                        printf("Rank: %s, Value: %d, Drawn: %d\n", playerDeck[i][j].rank_string, playerDeck[i][j].value_base, playerDeck[i][j].drawn);
-                    }
-                }
+                printDeck(Card **playerDeck);
             }
             break;
             case SEECARD:
             {
                 int userSuit = 0;
                 int userRank = 0;
-                inputPrompt(&userSuit, "Which suit?");
-                inputPrompt(&userRank, "Which rank (AS AN INTEGER)?");
-                printf("Suit %s, Rank: %s, Value: %d, Drawn: %d\n", playerDeck[userSuit][userRank].suit, playerDeck[userSuit][userRank].rank_string, playerDeck[userSuit][userRank].value_base, playerDeck[userSuit][userRank].drawn);
+                inputPrompt(&userSuit, "Which suit? (AS AN INTEGER)");
+                inputPrompt(&userRank, "Which rank? (AS AN INTEGER)");
+                printf("Suit %s, Rank: %s, Value: %d, Drawn: %d\n", playerDeck[userSuit-1][userRank-1].suit, playerDeck[userSuit-1][userRank-1].rank_string, playerDeck[userSuit-1][userRank-1].value_base, playerDeck[userSuit-1][userRank-1].drawn);
             }
         }
 
@@ -100,6 +92,27 @@ int main(void)
     }
     free(playerDeck);
     return 0;
+}
+
+void printDeck(Card **deck)
+[
+    printf("\n\n*****\nDECK\n*****");
+    for (int i = 0; i < NUMBER_SUITS; i++)
+    {
+        printf("\nSuit: %s\n", SUITS[i]);
+        for (int j = 0; j < SIZE_SUIT; j++)
+        {
+            printf("Rank: %s, Value: %d, Drawn: ", deck[i][j].rank_string, deck[i][j].value_base);
+            if (deck[i][j].drawn)
+            {
+                printf("true\n");
+            }
+            else
+            {
+                printf("false\n");
+            }
+        }
+    }
 }
 
 int inputHandler(int *variable)
