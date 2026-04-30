@@ -6,6 +6,7 @@
 // True/false macro
 #define false 0
 #define true 1
+#define EXIT 9
 
 // Basic 52-card deck definitions
 extern const uint8_t NUMBER_SUITS;

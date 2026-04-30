@@ -34,15 +34,21 @@ int* list_RNG(int length, int rangeStart, int rangeEnd)
     {
         int number = basic_RNG(nano_seed(), rangeStart, rangeEnd);
         listOut[incrementer] = number;
-        
-        while (incrementer != 0 && listOut[incrementer] == listOut[incrementer - 1])
-        {
-            listOut[incrementer] = basic_RNG(nano_seed(), rangeStart, rangeEnd);
-        }
     }
     
     return listOut;
 }
+
+// void undupe_int(Card **deck, Card *hand, int handSize)
+// {
+//     for (int i = 0; i < handSize; i++)
+//     {
+//         while ( && j != i)
+//         {
+//             hand[j].
+//         }
+//     }
+// }
 
 Card* hand_generate(Card **deck, int handSize)
 {
@@ -50,10 +56,16 @@ Card* hand_generate(Card **deck, int handSize)
     int *suitRNG = list_RNG(handSize, 0, NUMBER_SUITS);
     int *cardRNG = list_RNG(handSize, 0, SIZE_SUIT);
 
-
+    
     for (int i = 0; i < handSize; i++)
     {
-        handOut[i] = deck[suitRNG[i]][cardRNG[i]];
+        Card *ptrCard = &deck[suitRNG[i]][cardRNG[i]];
+        for (int j = 0; j < NUMBER_SUITS && ptrCard->drawn; j++)
+        {
+            ptrCard = &deck[suitRNG[i + j]][cardRNG[i + j]];
+        }
+        handOut[i] = *ptrCard;
+        ptrCard->drawn = true;
     }
 
     free(suitRNG);

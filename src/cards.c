@@ -30,21 +30,12 @@ Card** deck_allocate(void)
     return ptrDeck;
 }
 
-int value_total(Card *card)
-{
-    int output = card->value_base * card->multiplier;
-    return output;
-}
-
 void card_construct(Card *card, const char *suit, const char *rank_string, uint8_t value_base)
 {
     card->suit = suit;
     card->rank_string = rank_string;
     card->value_base = value_base;
-    card->multiplier = 1;
-    card->drawn = false;
-    
-    card->value_total = value_total;
+    card->drawn = false;    
 }
 
 Card** deck_construct(void)
