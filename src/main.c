@@ -36,9 +36,11 @@ int main(void)
         {
             case HAND:
             {
-                Card *hand = hand_generate(playerDeck, 5);
-                printf("\n\n*****\nHAND\n*****");
-                for (int i = 0; i < 5; i++)
+                int userHand = 0;
+                inputPrompt(&userHand, "How many cards in your hand?");
+                Card *hand = hand_generate(playerDeck, userHand);
+                printf("\n\n*****\nHAND\n*****\n");
+                for (int i = 0; i < userHand; i++)
                 {
                     printf("Suit: %s, Rank: %s, Drawn: %d\n", hand[i].suit, hand[i].rank_string, hand[i].drawn);
                 }

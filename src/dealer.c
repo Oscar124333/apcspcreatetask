@@ -62,7 +62,10 @@ Card* hand_generate(Card **deck, int handSize)
         Card *ptrCard = &deck[suitRNG[i]][cardRNG[i]];
         for (int j = 0; j < NUMBER_SUITS && ptrCard->drawn; j++)
         {
-            ptrCard = &deck[suitRNG[i + j]][cardRNG[i + j]];
+            for (int k = 0; k < SIZE_SUIT && ptrCard->drawn; k++)
+            {
+                ptrCard = &deck[(suitRNG[i] + j) % NUMBER_SUITS][(cardRNG[i] + k) % SIZE_SUIT];
+            }
         }
         handOut[i] = *ptrCard;
         ptrCard->drawn = true;
