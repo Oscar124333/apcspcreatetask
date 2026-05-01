@@ -7,6 +7,7 @@
 #include <stdint.h>
 #include <time.h>
 
+void printDeck(Card **deck);
 int inputHandler(int *variable);
 void inputPrompt(int *variable, char *prompt);
 
@@ -47,44 +48,23 @@ int main(void)
             }
             break;
             case SEEDECK:
-            {
-                printDeck(Card **playerDeck);
-            }
+                printDeck(playerDeck);
             break;
             case SEECARD:
             {
                 int userSuit = 0;
                 int userRank = 0;
-                inputPrompt(&userSuit, "Which suit? (AS AN INTEGER)");
-                inputPrompt(&userRank, "Which rank? (AS AN INTEGER)");
-                printf("Suit %s, Rank: %s, Value: %d, Drawn: %d\n", playerDeck[userSuit-1][userRank-1].suit, playerDeck[userSuit-1][userRank-1].rank_string, playerDeck[userSuit-1][userRank-1].value_base, playerDeck[userSuit-1][userRank-1].drawn);
+                inputPrompt(&userSuit, "Which suit?\n1: Spades\n2: Clubs\n3: Hearts\n4: Diamonds");
+                inputPrompt(&userRank, "Which rank? (AS AN INTEGER, 1-13)\nA, 2, 3,...J, Q, K");
+                // Alignment with lists
+                userSuit-=1;
+                userRank = (userRank + 11) % SIZE_SUIT;
+                printf("Suit %s, Rank: %s, Value: %d, Drawn: %d\n", playerDeck[userSuit][userRank].suit, playerDeck[userSuit][userRank].rank_string, playerDeck[userSuit][userRank].value_base, playerDeck[userSuit][userRank].drawn);
             }
         }
 
         inputPrompt(&userInput, prompt1);
     }
-
-
-    /* DEBUG */
-    // printf("\n");
-    // for (int i = 0; i < 5; i++)
-    // {
-    //     printf("Suit: %s, Rank: %s, Drawn: %d\n", hand[i].suit, hand[i].rank_string, hand[i].drawn);
-    // }
-    // printf("\n\n*****\nDECK\n*****");
-    // for (int i = 0; i < NUMBER_SUITS; i++)
-    // {
-    //     printf("\nSuit: %s\n", SUITS[i]);
-    //     for (int j = 0; j < SIZE_SUIT; j++)
-    //     {
-    //         // printf("Rank: %s, Value: %d, Drawn: %d\n", playerDeck[i][j].rank_string, playerDeck[i][j].value_base, playerDeck[i][j].drawn);
-    //         if (playerDeck[i][j].drawn)
-    //         {
-    //             printf("Rank: %s, Value: %d, Drawn: %d\n", playerDeck[i][j].rank_string, playerDeck[i][j].value_base, playerDeck[i][j].drawn);
-    //         }
-    //     }
-    // }
-    /* endDB */
 
     for (int i = 0; i < NUMBER_SUITS; i++)
     {
@@ -95,7 +75,7 @@ int main(void)
 }
 
 void printDeck(Card **deck)
-[
+{
     printf("\n\n*****\nDECK\n*****");
     for (int i = 0; i < NUMBER_SUITS; i++)
     {

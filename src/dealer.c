@@ -39,24 +39,12 @@ int* list_RNG(int length, int rangeStart, int rangeEnd)
     return listOut;
 }
 
-// void undupe_int(Card **deck, Card *hand, int handSize)
-// {
-//     for (int i = 0; i < handSize; i++)
-//     {
-//         while ( && j != i)
-//         {
-//             hand[j].
-//         }
-//     }
-// }
-
 Card* hand_generate(Card **deck, int handSize)
 {
     Card *handOut = malloc(sizeof(Card) * handSize + (NULL_TERM * sizeof(Card)));
     int *suitRNG = list_RNG(handSize, 0, NUMBER_SUITS);
     int *cardRNG = list_RNG(handSize, 0, SIZE_SUIT);
 
-    
     for (int i = 0; i < handSize; i++)
     {
         Card *ptrCard = &deck[suitRNG[i]][cardRNG[i]];
