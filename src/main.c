@@ -37,7 +37,7 @@ int main(void)
             case HAND:
             {
                 int userHand = 0;
-                inputPrompt(&userHand, "How many cards in your hand?");
+                inputPrompt(&userHand, "How many cards do you want in your hand?");
                 Card *hand = hand_generate(playerDeck, userHand);
                 printf("\n\n*****\nHAND\n*****\n");
                 for (int i = 0; i < userHand; i++)
